@@ -15,6 +15,7 @@ export default function NewIncident(){
     const navigate = useNavigate();
 
     const ongId = localStorage.getItem('ongID');
+    const ongToken = localStorage.getItem('ongToken');
 
     async function handleNewIncident(e){
         e.preventDefault();
@@ -29,6 +30,7 @@ export default function NewIncident(){
             await api.post('incidents', data, {
                 headers:{
                     Authorization: ongId,
+                    token: ongToken,
                 }
             })
 

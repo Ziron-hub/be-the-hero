@@ -12,15 +12,17 @@ import heroesImg from '../../assets/heroes.png';
 
 function Logon(){
     const [id, setId] = useState('');
+    const [senha, setSenha] = useState('');
     const navigate = useNavigate();
 
     async function handleLogin(e){
         e.preventDefault();
 
         try{
-            const response = await api.post('sessions', {id});
+            const response = await api.post('sessions', {id, senha});
             localStorage.setItem('ongID', id);
-            localStorage.setItem('ongName', response.data.name);    
+            localStorage.setItem('ongName', response.data.name);   
+            localStorage.setItem('ongToken', response.data.token);
         
             navigate('/profile');
         } catch(err){
@@ -40,6 +42,13 @@ function Logon(){
                         value = {id}
                         onChange = { e => setId(e.target.value)}
                     />
+
+                    <input type="password"
+                        placeholder="Sua Senha" 
+                        value = {senha}
+                        onChange = { e => setSenha(e.target.value)}
+                    />
+
                     <button className="button" type="submit">Entrar</button>
 
                     <Link className="back-link" to="/register">

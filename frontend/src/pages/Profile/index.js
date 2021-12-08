@@ -15,6 +15,7 @@ export default function Profile() {
 
     const ongId = localStorage.getItem('ongID');
     const ongName = localStorage.getItem('ongName');
+    const ongToken = localStorage.getItem('ongToken');
 
     
 
@@ -34,11 +35,13 @@ export default function Profile() {
             await api.delete(`incidents/${id}`, {
                 headers: {
                     Authorization: ongId,
+                    token: ongToken
                 }
             });
             setIncidents(incidents.filter(incident => incident.id !== id))
         } catch (err){
             alert('Erro ao deletar caso, tente novamente.');
+            
         }
     }
 
